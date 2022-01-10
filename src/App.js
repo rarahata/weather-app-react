@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <div className="container">
       <div className="weather-display border border-dark border-1 p-4 m-4">
       <form className="d-flex justify-content-center">
         <input type="text" placeholder="Enter your city..."></input>
@@ -27,12 +28,11 @@ function App() {
       </ul>
       </div>
       </div>
-      <div className="weather-forecast border border-dark border-1 p-4 m-4">
-      <div className="container">
+      <div className="weather-forecast border border-dark border-1 p-3 m-4">
       <div className="row">
       <div className="col-3">
       <p>Tue</p>
-      <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-forecast-icon" />
+      <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-forecast-icon" className="image-fluid" />
       <p>10 | 7</p>
       </div>
       <div className="col-3">
@@ -49,13 +49,13 @@ function App() {
       <p>Tue</p>
       <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-forecast-icon" />
       <p>10 | 7</p>
-      </div>
       </div>
       </div>
       </div>
       <p className="text-center">
         <a href="https://github.com/rarahata/vanilla-weather-app">Open-Source Code</a> by Rei Arahata
       </p>
+      </div>
     </div>
   );
 }
