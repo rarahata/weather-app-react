@@ -1,4 +1,6 @@
-.weather-display {
+.search-engine,
+.weather-display,
+.weather-forecast {
   border-radius: 20px;
 }
 
@@ -13,11 +15,6 @@
 
 .weather-display .condition {
   list-style-type: none;
-}
-
-.weather-forecast {
-  border-radius: 20px;
-
 }
 
 .weather-forecast p {
