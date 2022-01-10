@@ -1,13 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import './App.css';
 import axios from "axios";
 
-function App() {
+export default function App(props) {
+  let [weather, setWeather]=useState({});
+
+  function displayWeather(response){
+    setWeather({
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity
+  });
+  }
+
+  function handleSubmit(event){
+    event.preventDefault();
+    let apiKey="7796ed76d4738ed90e39d5875eb78f75";
+    let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
+  }
+
+
   return (
     <div className="App">
       <div className="container">
       <div className="weather-display border border-dark border-1 p-4 m-4">
-      <form className="d-flex justify-content-center">
+      <form className="d-flex justify-content-center" onSubmit={handleSubmit}>
         <input type="text" placeholder="Enter your city..."></input>
         <input type="submit" value="Search"></input>
       </form>
@@ -15,13 +32,13 @@ function App() {
       <p className="text-center mb-0">Last updated: Monday 17:00</p>
       <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" className="d-block m-auto pt-5 pb-5"/>
       <div className="d-flex justify-content-evenly">
-      <span><span className="temperature">7</span>°C | °F</span>
+      <span><span className="temperature">{weather.temperature} </span>°C | °F</span>
       <ul className="condition p-0">
         <li>
           Broken Clouds
         </li>
         <li>
-          Humidity: 55%
+          Humidity: {weather.humidity}%
         </li>
         <li>
           Wind: 1 m/s
@@ -58,7 +75,5 @@ function App() {
       </p>
       </div>
     </div>
-  );
+  )
 }
-
-export default App;
