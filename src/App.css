@@ -13,4 +13,16 @@
 
 .weather-forecast {
   border-radius: 20px;
+
 }
+
+.weather-forecast p {
+  text-align: center;
+}
+
+.weather-forecast img {
+  display: block;
+  margin: auto;
+  width: 80px;
+}
+
