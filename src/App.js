@@ -3,20 +3,28 @@ import './App.css';
 import axios from "axios";
 
 export default function App(props) {
+  let [city, setCity]=useState("");
   let [weather, setWeather]=useState({});
 
   function displayWeather(response){
     setWeather({
-      temperature: response.data.main.temp,
-      humidity: response.data.main.humidity
+      temperature: Math.round(response.data.main.temp),
+      description: response.data.weather[0].description,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   });
   }
 
   function handleSubmit(event){
     event.preventDefault();
     let apiKey="7796ed76d4738ed90e39d5875eb78f75";
-    let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+    let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
+  }
+
+  function updateCity(event){
+    setCity(event.target.value);
   }
 
 
@@ -25,23 +33,23 @@ export default function App(props) {
       <div className="container">
       <div className="weather-display border border-dark border-1 p-4 m-4">
       <form className="d-flex justify-content-center" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter your city..."></input>
+        <input type="text" placeholder="Enter your city..." onChange={updateCity}></input>
         <input type="submit" value="Search"></input>
       </form>
-      <h1 className="text-center pt-5">Tokyo</h1>
+      <h1 className="text-center pt-5">{city}</h1>
       <p className="text-center mb-0">Last updated: Monday 17:00</p>
-      <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" className="d-block m-auto pt-5 pb-5"/>
+      <img src={weather.icon} alt="weather-icon" className="d-block m-auto pt-5 pb-5"/>
       <div className="d-flex justify-content-evenly">
       <span><span className="temperature">{weather.temperature} </span>°C | °F</span>
       <ul className="condition p-0">
         <li>
-          Broken Clouds
+          {weather.description}
         </li>
         <li>
-          Humidity: {weather.humidity}%
+          humidity: {weather.humidity}%
         </li>
         <li>
-          Wind: 1 m/s
+          wind: {weather.wind} m/s
         </li>
       </ul>
       </div>
