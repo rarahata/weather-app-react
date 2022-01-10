@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <div className="weather-display border border-dark border-1 rounded p-4 m-4">
+      <div className="weather-display border border-dark border-1 p-4 m-4">
       <form className="d-flex justify-content-center">
         <input type="text" placeholder="Enter your city..."></input>
         <input type="submit" value="Search"></input>
@@ -27,7 +27,7 @@ function App() {
       </ul>
       </div>
       </div>
-      <div className="weather-forecast border border-dark border-1 rounded p-4 m-4">
+      <div className="weather-forecast border border-dark border-1 p-4 m-4">
       <div className="container">
       <div className="row">
       <div className="col-3">
