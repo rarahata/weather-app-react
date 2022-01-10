@@ -5,8 +5,10 @@ import axios from "axios";
 export default function App(props) {
   let [city, setCity]=useState("");
   let [weather, setWeather]=useState({});
+  let [pageShwon, setPageShown]=useState(false);
 
   function displayWeather(response){
+    setPageShown(true);
     setWeather({
       temperature: Math.round(response.data.main.temp),
       description: response.data.weather[0].description,
@@ -27,16 +29,20 @@ export default function App(props) {
     setCity(event.target.value);
   }
 
+  let form = <div className="search-engine border border-dark border-1 p-4 m-4">
+  <form className="d-flex justify-content-center" onSubmit={handleSubmit}>
+  <input type="text" placeholder="Enter your city..." onChange={updateCity}></input>
+  <input type="submit" value="Search"></input>
+  </form>
+  </div>
 
+  if (pageShwon){
   return (
     <div className="App">
       <div className="container">
+      {form}
       <div className="weather-display border border-dark border-1 p-4 m-4">
-      <form className="d-flex justify-content-center" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter your city..." onChange={updateCity}></input>
-        <input type="submit" value="Search"></input>
-      </form>
-      <h1 className="text-center pt-5">{city}</h1>
+      <h1 className="text-center mt-2">{city}</h1>
       <p className="text-center mb-0">Last updated: Monday 17:00</p>
       <img src={weather.icon} alt="weather-icon" className="d-block m-auto pt-5 pb-5"/>
       <div className="d-flex justify-content-evenly">
@@ -83,5 +89,7 @@ export default function App(props) {
       </p>
       </div>
     </div>
-  )
+  )}else{
+    return form;
+  }
 }
